@@ -1,0 +1,13 @@
+<svg width="1200" height="1400" viewBox="0 0 1200 1400" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="1200" height="1400" rx="48" fill="#F6EEE8"/>
+<rect x="70" y="70" width="1060" height="1260" rx="36" fill="#FFF9F5" stroke="#E3D2C9"/>
+<circle cx="930" cy="280" r="160" fill="#F1D8D2"/>
+<circle cx="290" cy="1100" r="210" fill="#EADFD6"/>
+<path d="M180 900C280 760 450 680 600 690C760 700 940 820 1010 980C1080 1140 1030 1280 900 1320H260C160 1230 110 1000 180 900Z" fill="#F6E8E1"/>
+<rect x="180" y="210" width="520" height="700" rx="260" fill="#E6CFC5"/>
+<rect x="510" y="210" width="210" height="720" rx="105" fill="#F4E5DD"/>
+<rect x="272" y="274" width="342" height="534" rx="171" fill="#FFF4EE"/>
+<path d="M408 598C458 553 532 554 581 598C628 640 634 719 598 768L443 983L293 768C258 719 362 640 408 598Z" fill="#D5A89B" opacity="0.75"/>
+<rect x="140" y="1080" width="420" height="82" rx="41" fill="#FFFFFF" fill-opacity="0.74"/>
+<text x="350" y="1133" text-anchor="middle" fill="#8F685E" font-size="34" font-family="Georgia">Elegant Wedding Demo</text>
+</svg>

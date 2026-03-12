@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ site.site_title }}{% endblock %}</title>
+    <meta name="description" content="{{ site.meta_description }}">
+    <meta name="theme-color" content="#f5eee8">
+    <meta property="og:title" content="{{ site.site_title }}">
+    <meta property="og:description" content="{{ site.meta_description }}">
+    <meta property="og:type" content="website">
+    <link rel="icon" type="image/svg+xml" href="{% static 'images/favicon.svg' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="site-shell">
+        <header class="site-header" id="top">
+            <div class="container header-inner">
+                <a class="brand" href="#hero" aria-label="Torna all'inizio">
+                    <span class="brand-mark">S&A</span>
+                    <span class="brand-text">Sara e Andrea</span>
+                </a>
+
+                <button class="menu-toggle" type="button" aria-label="Apri il menu" aria-expanded="false" aria-controls="site-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <nav class="site-nav" id="site-menu">
+                    <a href="#welcome">Benvenuto</a>
+                    <a href="#story">La nostra storia</a>
+                    <a href="#schedule">Programma</a>
+                    <a href="#locations">Location</a>
+                    <a href="#travel">Travel</a>
+                    <a href="#rsvp">RSVP</a>
+                    <a href="#gallery">Gallery</a>
+                    <a href="#faq">FAQ</a>
+                    <a href="#gift" class="nav-highlight">Lista nozze</a>
+                </nav>
+            </div>
+        </header>
+
+        {% if messages %}
+            <div class="flash-wrapper">
+                <div class="container">
+                    {% for message in messages %}
+                        <div class="flash flash-{{ message.tags }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+
+        <footer class="site-footer">
+            <div class="container footer-grid">
+                <div>
+                    <p class="footer-title">{{ site.couple_names }}</p>
+                    <p>{{ site.wedding_date_display }} · {{ site.city }}</p>
+                </div>
+                <div>
+                    <p class="footer-title">Contatti</p>
+                    <p><a href="mailto:{{ site.contact_email }}">{{ site.contact_email }}</a></p>
+                </div>
+                <div>
+                    <p class="footer-title">Hashtag</p>
+                    <p>{{ site.hashtag }}</p>
+                </div>
+                <div>
+                    <p class="footer-title">Link rapidi</p>
+                    <div class="footer-links">
+                        <a href="#rsvp">Conferma presenza</a>
+                        <a href="#schedule">Programma</a>
+                        <a href="#locations">Come arrivare</a>
+                    </div>
+                </div>
+            </div>
+            <div class="container footer-bottom">
+                <p>Demo wedding website premium realizzata in Django.</p>
+                <p>© {% now "Y" %} Sara e Andrea</p>
+            </div>
+        </footer>
+    </div>
+
+    <button class="back-to-top" type="button" aria-label="Torna su">↑</button>
+
+    <div class="lightbox" aria-hidden="true">
+        <button class="lightbox-close" type="button" aria-label="Chiudi anteprima">×</button>
+        <img src="" alt="" class="lightbox-image">
+    </div>
+
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,354 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="hero-section section" id="hero">
+    <div class="container hero-grid">
+        <div class="hero-copy reveal">
+            <p class="eyebrow">{{ site.hero.eyebrow }}</p>
+            <h1>{{ site.couple_names }}</h1>
+            <p class="hero-subtitle">{{ site.hero.subtitle }}</p>
+            <p class="hero-lead">{{ site.welcome_message }}</p>
+
+            <div class="hero-meta">
+                <div class="meta-card">
+                    <span class="meta-label">Cerimonia</span>
+                    <strong>{{ site.ceremony_location }}</strong>
+                </div>
+                <div class="meta-card">
+                    <span class="meta-label">Ricevimento</span>
+                    <strong>{{ site.reception_location }}</strong>
+                </div>
+            </div>
+
+            <div class="hero-actions">
+                <a href="#rsvp" class="btn btn-primary">Conferma presenza</a>
+                <a href="#schedule" class="btn btn-secondary">Vedi programma</a>
+                <a href="{{ site.maps.reception }}" class="btn btn-ghost" target="_blank" rel="noopener">Come arrivare</a>
+            </div>
+        </div>
+
+        <div class="hero-visual reveal">
+            <div class="hero-image-wrap">
+                <img src="{% static site.hero.image %}" alt="Hero wedding demo">
+                <div class="countdown-card" data-countdown="{{ site.wedding_datetime_iso }}">
+                    <p class="countdown-label">Mancano al nostro giorno</p>
+                    <div class="countdown-grid">
+                        <div><strong data-unit="days">0</strong><span>Giorni</span></div>
+                        <div><strong data-unit="hours">0</strong><span>Ore</span></div>
+                        <div><strong data-unit="minutes">0</strong><span>Minuti</span></div>
+                        <div><strong data-unit="seconds">0</strong><span>Secondi</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section soft-section" id="welcome">
+    <div class="container narrow reveal">
+        <div class="section-heading centered">
+            <p class="section-kicker">Benvenuto</p>
+            <h2>Un invito pensato con cura</h2>
+        </div>
+        <p class="lead-text">
+            {{ site.couple_description }}
+            Desideriamo vivere questa giornata circondati dalle persone che per noi contano davvero.
+            In questo spazio troverete tutte le informazioni utili per accompagnarci con semplicità e serenità.
+        </p>
+    </div>
+</section>
+
+<section class="section" id="story">
+    <div class="container">
+        <div class="section-heading reveal">
+            <p class="section-kicker">La nostra storia</p>
+            <h2>Piccoli momenti che ci hanno portati fin qui</h2>
+        </div>
+        <div class="timeline">
+            {% for item in site.story_timeline %}
+                <article class="timeline-item reveal">
+                    <span class="timeline-year">{{ item.year }}</span>
+                    <div class="timeline-content">
+                        <h3>{{ item.title }}</h3>
+                        <p>{{ item.text }}</p>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="section soft-section" id="schedule">
+    <div class="container">
+        <div class="section-heading reveal">
+            <p class="section-kicker">Programma della giornata</p>
+            <h2>Un ritmo pensato per vivere ogni momento</h2>
+        </div>
+        <div class="schedule-grid">
+            {% for item in site.schedule %}
+                <article class="schedule-card reveal">
+                    <span class="schedule-time">{{ item.time }}</span>
+                    <h3>{{ item.title }}</h3>
+                    <p>{{ item.description }}</p>
+                </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="section" id="locations">
+    <div class="container">
+        <div class="section-heading reveal">
+            <p class="section-kicker">Location</p>
+            <h2>Due luoghi, un’unica atmosfera</h2>
+        </div>
+        <div class="location-grid">
+            {% for location in site.locations %}
+                <article class="location-card reveal">
+                    <span class="location-label">{{ location.label }}</span>
+                    <h3>{{ location.name }}</h3>
+                    <p class="location-address">{{ location.address }}</p>
+                    <p>{{ location.description }}</p>
+                    <a href="{{ location.map_url }}" target="_blank" rel="noopener" class="btn btn-secondary">
+                        Apri Google Maps
+                    </a>
+                </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="section soft-section" id="travel">
+    <div class="container">
+        <div class="section-heading reveal">
+            <p class="section-kicker">Travel & alloggi</p>
+            <h2>Tutte le informazioni utili per organizzarti al meglio</h2>
+        </div>
+
+        <div class="travel-layout">
+            <div class="travel-card reveal">
+                <h3>Come arrivare</h3>
+                <ul class="clean-list">
+                    {% for item in site.travel_info.how_to_arrive %}
+                        <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="travel-card reveal">
+                <h3>Parcheggio & transfer</h3>
+                <p><strong>Parcheggio:</strong> {{ site.travel_info.parking }}</p>
+                <p><strong>Transfer:</strong> {{ site.travel_info.transfer }}</p>
+            </div>
+        </div>
+
+        <div class="hotel-grid">
+            {% for hotel in site.travel_info.hotels %}
+                <article class="hotel-card reveal">
+                    <h3>{{ hotel.name }}</h3>
+                    <p class="muted">{{ hotel.distance }} · {{ hotel.price }}</p>
+                    <p>{{ hotel.note }}</p>
+                </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="section" id="rsvp">
+    <div class="container">
+        <div class="section-heading reveal">
+            <p class="section-kicker">RSVP</p>
+            <h2>Conferma la tua presenza</h2>
+            <p>Ti chiediamo gentilmente di rispondere entro il 10 giugno 2026.</p>
+        </div>
+
+        <div class="rsvp-layout">
+            <div class="rsvp-info reveal">
+                <div class="info-panel">
+                    <h3>Perché compilare il form</h3>
+                    <p>Ci aiuterà a organizzare al meglio tavoli, menu, accoglienza e ogni dettaglio della giornata.</p>
+                </div>
+                <div class="info-panel">
+                    <h3>Contatto diretto</h3>
+                    <p>Per esigenze particolari puoi scriverci anche a <a href="mailto:{{ site.contact_email }}">{{ site.contact_email }}</a>.</p>
+                </div>
+                <div class="info-panel">
+                    <h3>Nota importante</h3>
+                    <p>Le informazioni inserite vengono salvate localmente nel database demo del progetto Django.</p>
+                </div>
+            </div>
+
+            <div class="form-card reveal">
+                <form method="post" novalidate class="rsvp-form">
+                    {% csrf_token %}
+
+                    <div class="form-grid">
+                        <div class="form-field">
+                            <label for="{{ form.full_name.id_for_label }}">{{ form.full_name.label }}</label>
+                            {{ form.full_name }}
+                            {% for error in form.full_name.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+                        </div>
+
+                        <div class="form-field">
+                            <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+                            {{ form.email }}
+                            {% for error in form.email.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+                        </div>
+
+                        <div class="form-field">
+                            <label for="{{ form.phone.id_for_label }}">{{ form.phone.label }}</label>
+                            {{ form.phone }}
+                            {% for error in form.phone.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+                        </div>
+
+                        <div class="form-field">
+                            <label for="{{ form.guest_count.id_for_label }}">{{ form.guest_count.label }}</label>
+                            {{ form.guest_count }}
+                            {% if form.guest_count.help_text %}
+                                <p class="field-help">{{ form.guest_count.help_text }}</p>
+                            {% endif %}
+                            {% for error in form.guest_count.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="form-field">
+                        <span class="field-label">{{ form.attending.label }}</span>
+                        <div class="radio-row">
+                            {% for radio in form.attending %}
+                                <label class="radio-card">
+                                    {{ radio.tag }}
+                                    <span>{{ radio.choice_label }}</span>
+                                </label>
+                            {% endfor %}
+                        </div>
+                        {% for error in form.attending.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-field">
+                            <label for="{{ form.menu_choice.id_for_label }}">{{ form.menu_choice.label }}</label>
+                            {{ form.menu_choice }}
+                            {% for error in form.menu_choice.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+                        </div>
+
+                        <div class="form-field checkbox-field">
+                            <label class="checkbox-label">
+                                {{ form.children_present }}
+                                <span>{{ form.children_present.label }}</span>
+                            </label>
+                            {% for error in form.children_present.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="{{ form.allergies.id_for_label }}">{{ form.allergies.label }}</label>
+                        {{ form.allergies }}
+                        {% for error in form.allergies.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+                    </div>
+
+                    <div class="form-field">
+                        <label for="{{ form.special_needs.id_for_label }}">{{ form.special_needs.label }}</label>
+                        {{ form.special_needs }}
+                        {% for error in form.special_needs.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+                    </div>
+
+                    <div class="form-field">
+                        <label for="{{ form.message.id_for_label }}">{{ form.message.label }}</label>
+                        {{ form.message }}
+                        {% for error in form.message.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+                    </div>
+
+                    <div class="form-field checkbox-field">
+                        <label class="checkbox-label">
+                            {{ form.privacy_accepted }}
+                            <span>Acconsento al trattamento dei dati per la gestione della conferma di partecipazione.</span>
+                        </label>
+                        {% for error in form.privacy_accepted.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+                    </div>
+
+                    {% if form.non_field_errors %}
+                        {% for error in form.non_field_errors %}
+                            <p class="field-error">{{ error }}</p>
+                        {% endfor %}
+                    {% endif %}
+
+                    <button type="submit" class="btn btn-primary btn-full">Invia conferma</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section soft-section" id="gallery">
+    <div class="container">
+        <div class="section-heading reveal">
+            <p class="section-kicker">Gallery</p>
+            <h2>Un’estetica delicata, luminosa, senza tempo</h2>
+        </div>
+        <div class="gallery-grid">
+            {% for image in site.gallery %}
+                <button class="gallery-item reveal" type="button" data-lightbox="{% static image.src %}" data-alt="{{ image.alt }}">
+                    <img src="{% static image.src %}" alt="{{ image.alt }}">
+                </button>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="section" id="media">
+    <div class="container media-layout">
+        <div class="media-card reveal">
+            <p class="section-kicker">Playlist</p>
+            <h2>La colonna sonora del nostro giorno</h2>
+            <p>Abbiamo raccolto una playlist dal tono elegante e leggero, perfetta per accompagnare l’attesa e rivivere l’atmosfera del matrimonio.</p>
+            <a href="{{ site.spotify_url }}" target="_blank" rel="noopener" class="btn btn-secondary">Apri Spotify</a>
+        </div>
+
+        <div class="media-card poster-card reveal">
+            <img src="{% static 'images/video-poster.svg' %}" alt="Video poster placeholder">
+            <div class="poster-copy">
+                <h3>Video intro</h3>
+                <p>Area pronta per inserire un trailer, un video saluto o una clip emozionale.</p>
+                <a href="{{ site.video_url }}" class="btn btn-ghost">Aggiungi video</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section soft-section" id="faq">
+    <div class="container">
+        <div class="section-heading reveal">
+            <p class="section-kicker">FAQ</p>
+            <h2>Domande frequenti</h2>
+        </div>
+        <div class="faq-list">
+            {% for item in site.faq %}
+                <article class="faq-item reveal">
+                    <button class="faq-question" type="button" aria-expanded="false">
+                        <span>{{ item.question }}</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>{{ item.answer }}</p>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="section" id="gift">
+    <div class="container narrow reveal">
+        <div class="gift-card">
+            <p class="section-kicker">Regalo / Lista nozze</p>
+            <h2>{{ site.gift.title }}</h2>
+            <p>{{ site.gift.text }}</p>
+            <div class="gift-box">
+                <span>{{ site.gift.iban_label }}</span>
+                <strong>{{ site.gift.iban }}</strong>
+                <p>{{ site.gift.note }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
